@@ -11,7 +11,7 @@ const minTempElement = document.getElementById('min-temp');
 const maxTempElement = document.getElementById('max-temp');
 const precipitationElement = document.getElementById('prec');
 
-navigator.geolocation.watchPosition(async(position) => {
+navigator.geolocation.watchPosition(async (position) => {
     const { latitude, longitude } = position.coords;
     console.log(latitude);
     console.log(longitude);
@@ -23,15 +23,15 @@ navigator.geolocation.watchPosition(async(position) => {
     precipitationElement.innerText = `${weatherData.current.precipitation} ${weatherData.current_units.precipitation}`;
 
 
-    const reverseUrl = new URL('/v2/reverse','https://api.geocodify.com');
-    reverseUrl.searchParams.set('api_key',API_KEY);
-    reverseUrl.searchParams.set('lat',latitude);
-    reverseUrl.searchParams.set('lng',longitude);
+    const reverseUrl = new URL('/v2/reverse', 'https://api.geocodify.com');
+    reverseUrl.searchParams.set('api_key', API_KEY);
+    reverseUrl.searchParams.set('lat', latitude);
+    reverseUrl.searchParams.set('lng', longitude);
     const response = await fetch(reverseUrl);
-    if(response.ok){
+    if (response.ok) {
         const geoData = await response.json();
         city.innerText = `${geoData.response.features[0].properties.name}`;
-        
+
     }
 });
 
